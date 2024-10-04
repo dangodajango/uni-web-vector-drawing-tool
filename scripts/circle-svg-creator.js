@@ -1,3 +1,5 @@
+import calculateRandomValueInRange from './util/random-number-generator.js'
+
 export default function appendCircleToCanvas(canvas) {
   const radius = 20;
   const x = calculateRandomValueInRange(
@@ -17,9 +19,9 @@ function createCircleSvgElement(x, y, radius) {
     'http://www.w3.org/2000/svg',
     'circle'
   );
-  circleSvgElement.setAttribute('r', radius);
   circleSvgElement.setAttribute('cx', x);
   circleSvgElement.setAttribute('cy', y);
+  circleSvgElement.setAttribute('r', radius);
   circleSvgElement.setAttribute('fill', 'white');
   circleSvgElement.setAttribute('stroke', 'black');
   circleSvgElement.addEventListener(
@@ -27,10 +29,6 @@ function createCircleSvgElement(x, y, radius) {
     selectElement.bind(this, circleSvgElement)
   );
   return circleSvgElement;
-}
-
-function calculateRandomValueInRange(lowerBound, upperBound) {
-  return Math.random() * (upperBound - lowerBound) + lowerBound;
 }
 
 function selectElement(svgElement) {
