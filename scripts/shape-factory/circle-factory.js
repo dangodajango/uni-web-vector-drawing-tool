@@ -1,8 +1,8 @@
-import generateCoordinates from './util/coordinates-genrator.js';
+import generateCoordinates from '../util/coordinates-genrator.js';
 import {
   configureCommonSvgAttributes,
   configureCommonEventListeners,
-} from './generic-svg-configurer.js';
+} from './generic-shape-cofiguration.js.js';
 
 const DEFAULT_RADIUS = 20;
 
@@ -12,11 +12,11 @@ export default function appendCircleToCanvas(canvas) {
     canvas.getAttribute('height'),
     DEFAULT_RADIUS
   );
-  const circleSvgElement = createCircleSvgElement(coordinates);
+  const circleSvgElement = createCircleElement(coordinates);
   canvas.appendChild(circleSvgElement);
 }
 
-function createCircleSvgElement(coordinates) {
+function createCircleElement(coordinates) {
   const circleSvgElement = document.createElementNS(
     'http://www.w3.org/2000/svg',
     'circle'
