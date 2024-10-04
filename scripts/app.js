@@ -1,5 +1,5 @@
 import appendCircleToCanvas from './shape-factory/circle-factory.js';
-import appendSquareToCanvas from './shape-factory/square-svg-creator.js';
+import appendSquareToCanvas from './shape-factory/square-factory.js';
 
 const canvas = document.getElementById('canvas');
 

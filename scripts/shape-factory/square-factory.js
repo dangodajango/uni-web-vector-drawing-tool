@@ -1,5 +1,5 @@
 import generateCoordinates from '../util/coordinates-genrator.js';
-import { configureCommonSvgAttributes } from './generic-shape-cofiguration.js.js';
+import { configureCommonSvgAttributes } from './generic-shape-cofiguration.js';
 import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
 
 const DEFAULT_SQUARE_SIDE_SIZE = 40;
