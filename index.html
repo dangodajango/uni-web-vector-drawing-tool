@@ -2,17 +2,69 @@
 <html>
   <head>
     <script src="scripts/app.js" type="module" defer></script>
+    <style>
+      .image-button {
+        width: 20px;
+        height: auto;
+      }
+    </style>
   </head>
   <body>
     <h1>Drawing application</h1>
-    <br />
-    <header>
-      <button id="create-square-button">Square</button>
-      <button id="create-circle-button">Circle</button>
-      <button id="create-rectangle-button">Rectangle</button>
-      <button id="clear-canvas">Clear</button>
-    </header>
 
-    <svg id="canvas" , width="500" , height="800"></svg>
+    <section id="operations-menu">
+      <button id="clear-canvas">Clear</button>
+    </section>
+    <br />
+
+    <section id="shapes-menu">
+      <button id="create-square-button">
+        <img src="assets/square.png" class="image-button" />
+      </button>
+      <button id="create-circle-button">
+        <img src="assets/circle.png" class="image-button" />
+      </button>
+      <button id="create-rectangle-button">
+        <img src="assets/rectangle.png" class="image-button" />
+      </button>
+      <button id="create-line-button">
+        <img src="assets/line.png" class="image-button" />
+      </button>
+    </section>
+
+    <br />
+
+    <section id="shape-properties-menu">
+      <div>
+        <label for="width-property">Width:</label>
+        <input type="number" id="width-property" />
+      </div>
+      <div>
+        <label for="height-property">Height:</label>
+        <input type="number" id="height-property" />
+      </div>
+      <div>
+        <label for="x-coordinate-property">X coordinate:</label>
+        <input type="number" id="x-coordinate-property" />
+      </div>
+      <div>
+        <label for="y-coordinate-property">Y coordinate:</label>
+        <input type="number" id="y-coordinate-property" />
+      </div>
+      <div>
+        <label for="stroke-color-property">Stroke color:</label>
+        <input type="number" id="stroke-color-property" />
+      </div>
+      <div>
+        <label for="storke-width-property">Stroke width:</label>
+        <input type="number" id="storke-width-property" />
+      </div>
+      <div>
+        <label for="color-property">Fill color:</label>
+        <input type="number" id="fill-color-property" />
+      </div>
+    </section>
+
+    <svg id="canvas" width="500" height="800"></svg>
   </body>
 </html>

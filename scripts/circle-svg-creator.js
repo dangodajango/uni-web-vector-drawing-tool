@@ -20,6 +20,8 @@ function createCircleSvgElement(x, y, radius) {
   circleSvgElement.setAttribute('r', radius);
   circleSvgElement.setAttribute('cx', x);
   circleSvgElement.setAttribute('cy', y);
+  circleSvgElement.setAttribute('fill', 'white');
+  circleSvgElement.setAttribute('stroke', 'black');
   circleSvgElement.addEventListener(
     'click',
     selectElement.bind(this, circleSvgElement)
