@@ -1,37 +1,31 @@
-import calculateRandomValueInRange from './util/random-number-generator.js'
+import generateCoordinates from './util/coordinates-genrator.js';
+import {
+  configureCommonSvgAttributes,
+  configureCommonEventListeners,
+} from './generic-svg-configurer.js';
 
-export default function appendSquaretoCanvas(canvas) {
-  const width = 40;
-  const x = calculateRandomValueInRange(
-    width,
-    canvas.getAttribute('width') - width
+const DEFAULT_SQUARE_SIDE_SIZE = 40;
+
+export default function appendSquareToCanvas(canvas) {
+  const coordiantes = generateCoordinates(
+    canvas.getAttribute('width'),
+    canvas.getAttribute('height'),
+    DEFAULT_SQUARE_SIDE_SIZE
   );
-  const y = calculateRandomValueInRange(
-    width,
-    canvas.getAttribute('height') - width
-  );
-  const squareSvgElement = createSquareSvgElement(x, y, width);
+  const squareSvgElement = createSquareSvgElement(coordiantes);
   canvas.appendChild(squareSvgElement);
 }
 
-function createSquareSvgElement(x, y, width) {
+function createSquareSvgElement(coordiantes) {
   const squareSvgElement = document.createElementNS(
     'http://www.w3.org/2000/svg',
     'rect'
   );
-  squareSvgElement.setAttribute('x', x);
-  squareSvgElement.setAttribute('y', y);
-  squareSvgElement.setAttribute('width', width);
-  squareSvgElement.setAttribute('height', width);
-  squareSvgElement.setAttribute('fill', 'white');
-  squareSvgElement.setAttribute('stroke', 'black');
-  squareSvgElement.addEventListener(
-    'click',
-    selectElement.bind(this, squareSvgElement)
-  );
+  squareSvgElement.setAttribute('x', coordiantes.x);
+  squareSvgElement.setAttribute('y', coordiantes.y);
+  squareSvgElement.setAttribute('width', DEFAULT_SQUARE_SIDE_SIZE);
+  squareSvgElement.setAttribute('height', DEFAULT_SQUARE_SIDE_SIZE);
+  configureCommonSvgAttributes(squareSvgElement, 'white', 'black');
+  configureCommonEventListeners(squareSvgElement);
   return squareSvgElement;
-}
-
-function selectElement(svgElement) {
-  console.log(svgElement);
 }

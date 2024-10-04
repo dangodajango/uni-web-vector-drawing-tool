@@ -1,36 +1,30 @@
-import calculateRandomValueInRange from './util/random-number-generator.js'
+import generateCoordinates from './util/coordinates-genrator.js';
+import {
+  configureCommonSvgAttributes,
+  configureCommonEventListeners,
+} from './generic-svg-configurer.js';
+
+const DEFAULT_RADIUS = 20;
 
 export default function appendCircleToCanvas(canvas) {
-  const radius = 20;
-  const x = calculateRandomValueInRange(
-    radius,
-    canvas.getAttribute('width') - radius
+  const coordinates = generateCoordinates(
+    canvas.getAttribute('width'),
+    canvas.getAttribute('height'),
+    DEFAULT_RADIUS
   );
-  const y = calculateRandomValueInRange(
-    radius,
-    canvas.getAttribute('height') - radius
-  );
-  const circleSvgElement = createCircleSvgElement(x, y, radius);
+  const circleSvgElement = createCircleSvgElement(coordinates);
   canvas.appendChild(circleSvgElement);
 }
 
-function createCircleSvgElement(x, y, radius) {
+function createCircleSvgElement(coordinates) {
   const circleSvgElement = document.createElementNS(
     'http://www.w3.org/2000/svg',
     'circle'
   );
-  circleSvgElement.setAttribute('cx', x);
-  circleSvgElement.setAttribute('cy', y);
-  circleSvgElement.setAttribute('r', radius);
-  circleSvgElement.setAttribute('fill', 'white');
-  circleSvgElement.setAttribute('stroke', 'black');
-  circleSvgElement.addEventListener(
-    'click',
-    selectElement.bind(this, circleSvgElement)
-  );
+  circleSvgElement.setAttribute('cx', coordinates.x);
+  circleSvgElement.setAttribute('cy', coordinates.y);
+  circleSvgElement.setAttribute('r', DEFAULT_RADIUS);
+  configureCommonSvgAttributes(circleSvgElement, 'white', 'black');
+  configureCommonEventListeners(circleSvgElement);
   return circleSvgElement;
-}
-
-function selectElement(svgElement) {
-  console.log(svgElement);
 }
