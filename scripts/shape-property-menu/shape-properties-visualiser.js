@@ -5,7 +5,7 @@ export default function visualiseShapeProperties(shapeProperties) {
   for (const property in shapeProperties) {
     const div = document.createElement('div');
     const input = createInputElement(shapeProperties, property);
-    const label = createLabelElement(property, input);
+    const label = createLabelElement(shapeProperties[property], input);
     div.append(label, input);
     shapePropertiesMenu.append(div);
   }
@@ -25,7 +25,7 @@ function createInputElement(shapeProperties, property) {
 
 function createLabelElement(property, inputElement) {
   const label = document.createElement('label');
-  label.textContent = `${property}`;
+  label.textContent = property.displayName;
   label.htmlFor = inputElement.id;
   return label;
 }

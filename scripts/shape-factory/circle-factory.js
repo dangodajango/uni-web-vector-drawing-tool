@@ -30,12 +30,36 @@ function createCircleElement(coordinates) {
 function configureOnClickEventListener(circleElement) {
   circleElement.addEventListener('click', () => {
     const shapeProperties = {
-      stroke: { value: circleElement.getAttribute('stroke'), type: 'text' },
+      cx: {
+        value: circleElement.getAttribute('cx'),
+        type: 'number',
+        displayName: 'X',
+      },
+      cy: {
+        value: circleElement.getAttribute('cy'),
+        type: 'number',
+        displayName: 'Y',
+      },
+      r: {
+        value: circleElement.getAttribute('r'),
+        type: 'number',
+        displayName: 'Radius',
+      },
+      stroke: {
+        value: circleElement.getAttribute('stroke'),
+        type: 'text',
+        displayName: 'Stroke',
+      },
       'stroke-width': {
         value: circleElement.getAttribute('stroke-width') || 1,
         type: 'number',
+        displayName: 'Stroke width',
       },
-      fill: { value: circleElement.getAttribute('fill'), type: 'text' },
+      fill: {
+        value: circleElement.getAttribute('fill'),
+        type: 'text',
+        displayName: 'Fill color',
+      },
     };
     visualiseShapeProperties(shapeProperties);
   });
