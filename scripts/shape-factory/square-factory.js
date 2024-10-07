@@ -31,12 +31,41 @@ function createSquareElement(coordiantes) {
 function configureOnClickEventListener(squareElement) {
   squareElement.addEventListener('click', () => {
     const squareProperties = {
-      stroke: { value: squareElement.getAttribute('stroke'), type: 'text' },
+      x: {
+        value: squareElement.getAttribute('x'),
+        type: 'number',
+        displayName: 'X',
+      },
+      y: {
+        value: squareElement.getAttribute('y'),
+        type: 'number',
+        displayName: 'Y',
+      },
+      width: {
+        value: squareElement.getAttribute('width'),
+        type: 'number',
+        displayName: 'Width',
+      },
+      height: {
+        value: squareElement.getAttribute('height'),
+        type: 'number',
+        displayName: 'Height',
+      },
+      stroke: {
+        value: squareElement.getAttribute('stroke'),
+        type: 'text',
+        displayName: 'Stroke',
+      },
       'stroke-width': {
         value: squareElement.getAttribute('stroke-width') || 1,
         type: 'number',
+        displayName: 'Stroke width',
       },
-      fill: { value: squareElement.getAttribute('fill'), type: 'text' },
+      fill: {
+        value: squareElement.getAttribute('fill'),
+        type: 'text',
+        displayName: 'Fill color',
+      },
     };
     visualiseShapeProperties(squareProperties);
   });
