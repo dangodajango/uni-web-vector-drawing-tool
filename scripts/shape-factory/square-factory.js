@@ -14,11 +14,14 @@ export default function appendSquareToCanvas(canvas) {
   canvas.appendChild(squareSvgElement);
 }
 
+// In order to generate a unique ID for each circle, so we can further query each one individually, it will use the Date.now() function.
+// Date.now() gives us the total milliseconds elapsed since January 1st 1970, and assuming that the user won't spam the buttons somehow, it should be a sufficient solution.
 function createSquareElement(coordiantes) {
   const squareElement = document.createElementNS(
     'http://www.w3.org/2000/svg',
     'rect'
   );
+  squareElement.id = Date.now();
   squareElement.setAttribute('x', coordiantes.x);
   squareElement.setAttribute('y', coordiantes.y);
   squareElement.setAttribute('width', DEFAULT_SQUARE_SIDE_SIZE);
@@ -67,6 +70,6 @@ function configureOnClickEventListener(squareElement) {
         displayName: 'Fill color',
       },
     };
-    visualiseShapeProperties(squareProperties);
+    visualiseShapeProperties(squareElement.id, squareProperties);
   });
 }
