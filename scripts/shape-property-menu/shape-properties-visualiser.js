@@ -30,12 +30,22 @@ function createInputElement(shapeId, shapeProperties, property) {
   input.id = `${property}`;
   input.value = shapeProperties[property].value;
   input.type = shapeProperties[property].type;
-  input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      modifyPropertyOfShape(shapeId, property, event.target.value);
-    }
-  });
+  createEventListenerForInputElements(shapeId, input, property);
   return input;
+}
+
+function createEventListenerForInputElements(shapeId, input, property) {
+  if (input.type === 'color') {
+    input.addEventListener('change', (event) => {
+      modifyPropertyOfShape(shapeId, property, event.target.value);
+    });
+  } else {
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        modifyPropertyOfShape(shapeId, property, event.target.value);
+      }
+    });
+  }
 }
 
 function createLabelElement(property, inputElement) {
