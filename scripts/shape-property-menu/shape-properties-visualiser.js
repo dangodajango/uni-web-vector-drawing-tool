@@ -1,3 +1,5 @@
+import modifyPropertyOfShape from './shape-property-modifier.js';
+
 const shapePropertiesMenu = document.getElementById('shape-properties-menu');
 
 export default function visualiseShapeProperties(shapeId, shapeProperties) {
@@ -5,7 +7,7 @@ export default function visualiseShapeProperties(shapeId, shapeProperties) {
   displayShapeId(shapePropertiesMenu, shapeId);
   for (const property in shapeProperties) {
     const div = document.createElement('div');
-    const input = createInputElement(shapeProperties, property);
+    const input = createInputElement(shapeId, shapeProperties, property);
     const label = createLabelElement(shapeProperties[property], input);
     div.append(label, input);
     shapePropertiesMenu.append(div);
@@ -23,11 +25,16 @@ function displayShapeId(shapePropertiesMenu, shapeId) {
   shapePropertiesMenu.append(div);
 }
 
-function createInputElement(shapeProperties, property) {
+function createInputElement(shapeId, shapeProperties, property) {
   const input = document.createElement('input');
   input.id = `${property}`;
   input.value = shapeProperties[property].value;
   input.type = shapeProperties[property].type;
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      modifyPropertyOfShape(shapeId, property, event.target.value);
+    }
+  });
   return input;
 }
 
