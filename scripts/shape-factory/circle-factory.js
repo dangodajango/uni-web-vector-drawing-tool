@@ -50,7 +50,7 @@ function configureOnClickEventListener(circleElement) {
       },
       stroke: {
         value: circleElement.getAttribute('stroke'),
-        type: 'text',
+        type: 'color',
         displayName: 'Stroke',
       },
       'stroke-width': {
@@ -60,7 +60,7 @@ function configureOnClickEventListener(circleElement) {
       },
       fill: {
         value: circleElement.getAttribute('fill'),
-        type: 'text',
+        type: 'color',
         displayName: 'Fill color',
       },
     };

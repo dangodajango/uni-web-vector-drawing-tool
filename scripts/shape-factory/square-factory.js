@@ -56,7 +56,7 @@ function configureOnClickEventListener(squareElement) {
       },
       stroke: {
         value: squareElement.getAttribute('stroke'),
-        type: 'text',
+        type: 'color',
         displayName: 'Stroke',
       },
       'stroke-width': {
@@ -66,7 +66,7 @@ function configureOnClickEventListener(squareElement) {
       },
       fill: {
         value: squareElement.getAttribute('fill'),
-        type: 'text',
+        type: 'color',
         displayName: 'Fill color',
       },
     };
