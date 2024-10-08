@@ -1,5 +1,5 @@
 import generateCoordinates from '../util/coordinates-genrator.js';
-import { configureCommonSvgAttributes } from './generic-shape-cofiguration.js';
+import configureCommonSvgAttributes from './generic-shape-cofiguration.js';
 import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
 
 const DEFAULT_RADIUS = 20;
