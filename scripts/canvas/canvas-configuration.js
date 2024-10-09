@@ -10,12 +10,12 @@ const canvas = document.getElementById('canvas');
 let dragFunctions;
 
 export default function configureCanvas() {
-  const squareButton = document.getElementById('create-square-button');
   configureShapeButtons();
   configureShapeDragging();
 }
 
 function configureShapeButtons() {
+  const squareButton = document.getElementById('create-square-button');
   squareButton.addEventListener('click', () => {
     if (!dragFunctions) {
       dragFunctions = {
