@@ -1,6 +1,9 @@
-import configureCommonSvgAttributes from './generic-shape-cofiguration.js';
+import {
+  configureCommonSvgAttributes,
+  getCommongShapeProperties,
+} from './generic-shape-cofiguration.js';
 import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
-import {canvas} from '../canvas/canvas-configuration.js'
+import { canvas } from '../canvas/canvas-configuration.js';
 
 export default function appendRectangleToCanvas(coordiantes, sidesLength) {
   console.log(coordiantes, canvas, sidesLength);
@@ -49,21 +52,7 @@ function configureOnClickEventListener(rectangleElement) {
         type: 'number',
         displayName: 'Height',
       },
-      stroke: {
-        value: rectangleElement.getAttribute('stroke'),
-        type: 'color',
-        displayName: 'Stroke',
-      },
-      'stroke-width': {
-        value: rectangleElement.getAttribute('stroke-width') || 1,
-        type: 'number',
-        displayName: 'Stroke width',
-      },
-      fill: {
-        value: rectangleElement.getAttribute('fill'),
-        type: 'color',
-        displayName: 'Fill color',
-      },
+      ...getCommongShapeProperties(rectangleElement),
     };
     visualiseShapeProperties(rectangleElement.id, rectangleProperties);
   });

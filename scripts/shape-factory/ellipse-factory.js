@@ -1,4 +1,7 @@
-import configureCommonSvgAttributes from './generic-shape-cofiguration.js';
+import {
+  configureCommonSvgAttributes,
+  getCommongShapeProperties,
+} from './generic-shape-cofiguration.js';
 import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
 import { canvas } from '../canvas/canvas-configuration.js';
 
@@ -49,21 +52,7 @@ function configureOnClickEventListener(ellipseElement) {
         type: 'number',
         displayName: 'Radius - Y',
       },
-      stroke: {
-        value: ellipseElement.getAttribute('stroke'),
-        type: 'color',
-        displayName: 'Stroke',
-      },
-      'stroke-width': {
-        value: ellipseElement.getAttribute('stroke-width') || 1,
-        type: 'number',
-        displayName: 'Stroke width',
-      },
-      fill: {
-        value: ellipseElement.getAttribute('fill'),
-        type: 'color',
-        displayName: 'Fill color',
-      },
+      ...getCommongShapeProperties(ellipseElement),
     };
     visualiseShapeProperties(ellipseElement.id, shapeProperties);
   });
