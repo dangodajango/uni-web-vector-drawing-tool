@@ -1,7 +1,8 @@
 import configureCommonSvgAttributes from './generic-shape-cofiguration.js';
 import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
+import {canvas} from '../canvas/canvas-configuration.js'
 
-export default function appendSquareToCanvas(canvas, coordiantes, sidesLength) {
+export default function appendSquareToCanvas(coordiantes, sidesLength) {
   console.log(coordiantes, canvas, sidesLength);
   const squareElement = createSquareElement(coordiantes, sidesLength);
   canvas.appendChild(squareElement);

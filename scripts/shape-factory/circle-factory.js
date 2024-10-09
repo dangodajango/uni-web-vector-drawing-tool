@@ -1,22 +1,17 @@
-import generateCoordinates from '../util/coordinates-genrator.js';
 import configureCommonSvgAttributes from './generic-shape-cofiguration.js';
 import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
+import { canvas } from '../canvas/canvas-configuration.js';
 
-const DEFAULT_RADIUS = 20;
-
-export default function appendCircleToCanvas(canvas) {
-  const coordinates = generateCoordinates(
-    canvas.getAttribute('width'),
-    canvas.getAttribute('height'),
-    DEFAULT_RADIUS
-  );
-  const circleElement = createCircleElement(coordinates);
+export default function appendCircleToCanvas(coordinates, radius) {
+  console.log(coordinates, canvas, radius);
+  const circleElement = createCircleElement(coordinates, radius);
   canvas.appendChild(circleElement);
+  return circleElement;
 }
 
 // In order to generate a unique ID for each circle, so we can further query each one individually, it will use the Date.now() function.
 // Date.now() gives us the total milliseconds elapsed since January 1st 1970, and assuming that the user won't spam the buttons somehow, it should be a sufficient solution.
-function createCircleElement(coordinates) {
+function createCircleElement(coordinates, radius) {
   const circleElement = document.createElementNS(
     'http://www.w3.org/2000/svg',
     'circle'
@@ -24,7 +19,7 @@ function createCircleElement(coordinates) {
   circleElement.id = Date.now();
   circleElement.setAttribute('cx', coordinates.x);
   circleElement.setAttribute('cy', coordinates.y);
-  circleElement.setAttribute('r', DEFAULT_RADIUS);
+  circleElement.setAttribute('r', radius);
   configureCommonSvgAttributes(circleElement, 'white', 'black');
   configureOnClickEventListener(circleElement);
   return circleElement;

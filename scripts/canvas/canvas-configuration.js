@@ -1,4 +1,4 @@
-const canvas = document.getElementById('canvas');
+export const canvas = document.getElementById('canvas');
 
 // Each shape implements differently the drag logic therefore we keep the functions for the 3 stages of the drag in this object.
 let dragFunctions;

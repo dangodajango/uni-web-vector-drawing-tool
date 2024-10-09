@@ -6,7 +6,7 @@ export const squareDragFunctions = {
   onMouseUp: resetDragState,
 };
 
-let shape, startX, startY;
+let square, startX, startY;
 
 let isDragging = false;
 
@@ -17,8 +17,7 @@ function createSquare(event) {
   startX = event.offsetX;
   startY = event.offsetY;
   isDragging = true;
-  shape = appendSquareToCanvas(
-    canvas,
+  square = appendSquareToCanvas(
     {
       x: event.offsetX,
       y: event.offsetY,
@@ -50,16 +49,16 @@ function resizeSquareWhileDragging(event) {
   // If currentY < startY -> the drag is up, otherwise down.
   const shapeY = currentY < startY ? currentY : startY;
 
-  shape.setAttribute('width', width);
-  shape.setAttribute('height', height);
-  shape.setAttribute('x', shapeX);
-  shape.setAttribute('y', shapeY);
+  square.setAttribute('width', width);
+  square.setAttribute('height', height);
+  square.setAttribute('x', shapeX);
+  square.setAttribute('y', shapeY);
 }
 
 // When the mouse button has been released, it means the user has finished drawing the shape
 // therefor all the state for that specific shape is cleared.
 function resetDragState() {
-  shape = null;
+  square = null;
   startX = null;
   startY = null;
   isDragging = false;
