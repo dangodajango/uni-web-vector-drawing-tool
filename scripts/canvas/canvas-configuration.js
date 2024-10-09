@@ -4,7 +4,6 @@ const canvas = document.getElementById('canvas');
 let dragFunctions;
 
 export default function configureCanvas() {
-  configureShapeButtons();
   configureShapeDragging();
 }
 
