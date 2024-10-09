@@ -9,7 +9,7 @@ export default function appendSquareToCanvas(coordiantes, sidesLength) {
   return squareElement;
 }
 
-// In order to generate a unique ID for each circle, so we can further query each one individually, it will use the Date.now() function.
+// In order to generate a unique ID for each square, so we can further query each one individually, it will use the Date.now() function.
 // Date.now() gives us the total milliseconds elapsed since January 1st 1970, and assuming that the user won't spam the buttons somehow, it should be a sufficient solution.
 function createSquareElement(coordiantes, sidesLength) {
   const squareElement = document.createElementNS(
