@@ -1,9 +1,3 @@
-import {
-  createSquare,
-  resetDragState,
-  resizeSquareWhileDragging,
-} from '../shape-drag-sizing/square-drag.js';
-
 const canvas = document.getElementById('canvas');
 
 // Each shape implements differently the drag logic therefore we keep the functions for the 3 stages of the drag in this object.
@@ -14,19 +8,12 @@ export default function configureCanvas() {
   configureShapeDragging();
 }
 
-function configureShapeButtons() {
-  const squareButton = document.getElementById('create-square-button');
-  squareButton.addEventListener('click', () => {
-    if (!dragFunctions) {
-      dragFunctions = {
-        onMouseDown: createSquare,
-        onMouseMove: resizeSquareWhileDragging,
-        onMouseUp: resetDragState,
-      };
-    } else {
-      dragFunctions = null;
-    }
-  });
+export function updateDragFunctions(updatedDragFunctions) {
+  if (!dragFunctions) {
+    dragFunctions = updatedDragFunctions;
+  } else {
+    dragFunctions = null;
+  }
 }
 
 // When we want to create a shape it should be done by clicking on the corresponding shape button
