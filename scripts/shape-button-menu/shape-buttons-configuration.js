@@ -9,14 +9,14 @@ export default function configureShapeButtons() {
 }
 
 function configureRectangleButton() {
-  const rectangleButton = document.getElementById('create-rectangle-button');
+  const rectangleButton = document.getElementById('draw-rectangle-button');
   rectangleButton.addEventListener('click', () =>
     updateDragFunctions(rectangleDragFunctions)
   );
 }
 
 function configureEllipseButton() {
-  const ellipseButton = document.getElementById('create-ellipse-button');
+  const ellipseButton = document.getElementById('draw-ellipse-button');
   ellipseButton.addEventListener('click', () =>
     updateDragFunctions(ellipseDragFunctions)
   );

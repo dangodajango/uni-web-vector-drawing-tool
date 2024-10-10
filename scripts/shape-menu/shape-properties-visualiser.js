@@ -1,6 +1,6 @@
 import modifyPropertyOfShape from './shape-property-modifier.js';
 
-const shapePropertiesMenu = document.getElementById('shape-properties-menu');
+const shapePropertiesMenu = document.getElementById('shape-properties');
 
 export default function visualiseShapeProperties(shapeId, shapeProperties) {
   clearPreviousSelection();

@@ -4,7 +4,7 @@ import configureShapeButtons from './shape-button-menu/shape-buttons-configurati
 
 const canvas = document.getElementById('canvas');
 
-const clearCanvasButton = document.getElementById('clear-canvas');
+const clearCanvasButton = document.getElementById('clear-canvas-button');
 clearCanvasButton.addEventListener('click', clearCanvas.bind(this, canvas));
 
 function clearCanvas(canvas) {

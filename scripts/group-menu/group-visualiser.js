@@ -1,4 +1,4 @@
-const groupMenu = document.getElementById('group-menu');
+const groupMenu = document.getElementById('shape-groups');
 
 /**
  * <div id="group-...">

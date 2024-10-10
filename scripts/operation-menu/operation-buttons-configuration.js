@@ -11,7 +11,7 @@ export function configureOperationButtons(canvas) {
 }
 
 function configureSelectButton() {
-  const selectShapeButton = document.getElementById('select-shape');
+  const selectShapeButton = document.getElementById('select-shape-button');
   selectShapeButton.addEventListener('click', () =>
     operation === SELECT_OPEARATION
       ? (operation = null)
@@ -20,7 +20,7 @@ function configureSelectButton() {
 }
 
 function configureGroupButton(canvas) {
-  const groupShapesButton = document.getElementById('group-shapes');
+  const groupShapesButton = document.getElementById('group-shapes-button');
   groupShapesButton.addEventListener('click', () => {
     if (operation === GROUP_OPEARATION) {
       operation = null;
