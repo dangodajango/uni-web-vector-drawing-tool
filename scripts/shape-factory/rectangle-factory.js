@@ -2,8 +2,9 @@ import {
   configureCommonSvgAttributes,
   getCommongShapeProperties,
 } from './generic-shape-cofiguration.js';
-import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
 import { canvas } from '../canvas/canvas-configuration.js';
+import { opearation } from '../opearations-menu/operation-buttons-configuration.js';
+import { selectShape } from '../opearations-menu/select-shape.js';
 
 export default function appendRectangleToCanvas(coordiantes, sidesLength) {
   console.log(coordiantes, canvas, sidesLength);
@@ -31,29 +32,37 @@ function createRectangleElement(coordiantes, sidesLength) {
 
 function configureOnClickEventListener(rectangleElement) {
   rectangleElement.addEventListener('click', () => {
-    const rectangleProperties = {
-      x: {
-        value: rectangleElement.getAttribute('x'),
-        type: 'number',
-        displayName: 'X',
-      },
-      y: {
-        value: rectangleElement.getAttribute('y'),
-        type: 'number',
-        displayName: 'Y',
-      },
-      width: {
-        value: rectangleElement.getAttribute('width'),
-        type: 'number',
-        displayName: 'Width',
-      },
-      height: {
-        value: rectangleElement.getAttribute('height'),
-        type: 'number',
-        displayName: 'Height',
-      },
-      ...getCommongShapeProperties(rectangleElement),
-    };
-    visualiseShapeProperties(rectangleElement.id, rectangleProperties);
+    switch (opearation) {
+      case 'SELECT':
+        selectRectangle(rectangleElement);
+        break;
+    }
   });
+}
+
+function selectRectangle(rectangleElement) {
+  const rectangleProperties = {
+    x: {
+      value: rectangleElement.getAttribute('x'),
+      type: 'number',
+      displayName: 'X',
+    },
+    y: {
+      value: rectangleElement.getAttribute('y'),
+      type: 'number',
+      displayName: 'Y',
+    },
+    width: {
+      value: rectangleElement.getAttribute('width'),
+      type: 'number',
+      displayName: 'Width',
+    },
+    height: {
+      value: rectangleElement.getAttribute('height'),
+      type: 'number',
+      displayName: 'Height',
+    },
+    ...getCommongShapeProperties(rectangleElement),
+  };
+  selectShape(rectangleElement, rectangleProperties);
 }

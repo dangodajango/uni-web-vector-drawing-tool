@@ -2,8 +2,9 @@ import {
   configureCommonSvgAttributes,
   getCommongShapeProperties,
 } from './generic-shape-cofiguration.js';
-import visualiseShapeProperties from '../shape-property-menu/shape-properties-visualiser.js';
 import { canvas } from '../canvas/canvas-configuration.js';
+import { selectShape } from '../opearations-menu/select-shape.js';
+import { opearation } from '../opearations-menu/operation-buttons-configuration.js';
 
 export default function appendEllipseToCanvas(coordinates, radius) {
   console.log(coordinates, canvas, radius);
@@ -31,29 +32,37 @@ function createEllipseElement(coordinates, radius) {
 
 function configureOnClickEventListener(ellipseElement) {
   ellipseElement.addEventListener('click', () => {
-    const shapeProperties = {
-      cx: {
-        value: ellipseElement.getAttribute('cx'),
-        type: 'number',
-        displayName: 'X',
-      },
-      cy: {
-        value: ellipseElement.getAttribute('cy'),
-        type: 'number',
-        displayName: 'Y',
-      },
-      rx: {
-        value: ellipseElement.getAttribute('rx'),
-        type: 'number',
-        displayName: 'Radius - X',
-      },
-      ry: {
-        value: ellipseElement.getAttribute('ry'),
-        type: 'number',
-        displayName: 'Radius - Y',
-      },
-      ...getCommongShapeProperties(ellipseElement),
-    };
-    visualiseShapeProperties(ellipseElement.id, shapeProperties);
+    switch (opearation) {
+      case 'SELECT':
+        selectEllipse(ellipseElement);
+        break;
+    }
   });
+}
+
+function selectEllipse(ellipseElement) {
+  const ellipseProperties = {
+    cx: {
+      value: ellipseElement.getAttribute('cx'),
+      type: 'number',
+      displayName: 'X',
+    },
+    cy: {
+      value: ellipseElement.getAttribute('cy'),
+      type: 'number',
+      displayName: 'Y',
+    },
+    rx: {
+      value: ellipseElement.getAttribute('rx'),
+      type: 'number',
+      displayName: 'Radius - X',
+    },
+    ry: {
+      value: ellipseElement.getAttribute('ry'),
+      type: 'number',
+      displayName: 'Radius - Y',
+    },
+    ...getCommongShapeProperties(ellipseElement),
+  };
+  selectShape(ellipseElement, ellipseProperties);
 }
