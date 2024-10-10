@@ -1,4 +1,4 @@
-import appendRectangleToCanvas from '../shape-factory/rectangle.js';
+import appendRectangleToCanvas from '../rectangle.js';
 
 export const rectangleDragFunctions = {
   onMouseDown: createRectangle,

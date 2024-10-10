@@ -1,9 +1,9 @@
 import { updateDragFunctions } from '../canvas/canvas-configuration.js';
-import { rectangleDragFunctions } from '../shape-drag/rectangle-drag.js';
-import { ellipseDragFunctions } from '../shape-drag/ellipse-drag.js';
+import { rectangleDragFunctions } from '../shape-factory/shape-drag/rectangle-drag.js';
+import { ellipseDragFunctions } from '../shape-factory/shape-drag/ellipse-drag.js';
 
 // When a button for shape creation is pressed, it will load the corresponding shape dragging logic into the canvas where the dragging listeners are implemented.
-export default function configureShapeButtons() {
+export default function configureDrawingButtons() {
   configureRectangleButton();
   configureEllipseButton();
 }

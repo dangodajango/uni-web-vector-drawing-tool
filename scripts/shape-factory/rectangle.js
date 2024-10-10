@@ -7,9 +7,9 @@ import {
   GROUP_OPEARATION,
   operation,
   SELECT_OPEARATION,
-} from '../operation-menu/operation-buttons-configuration.js';
-import { selectShape } from '../operation-menu/select-shape.js';
-import { appendShapeToGroup } from '../operation-menu/group-shapes.js';
+} from '../canvas-toolbar/tools-configuration.js';
+import { selectShape } from '../canvas-toolbar/select-tool.js';
+import { appendShapeToGroup } from '../canvas-toolbar/group-tool.js';
 
 export default function appendRectangleToCanvas(coordiantes, sidesLength) {
   const rectangleElement = createRectangleElement(coordiantes, sidesLength);

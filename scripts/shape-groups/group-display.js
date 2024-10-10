@@ -6,7 +6,7 @@ const groupMenu = document.getElementById('shape-groups');
  *    <section></section>
  * </div>
  */
-export function createGroupVisualisation(group) {
+export function createGroupDisplay(group) {
   const div = document.createElement('div');
   div.id = `group-${group.id}`;
 
@@ -20,7 +20,7 @@ export function createGroupVisualisation(group) {
   groupMenu.append(div);
 }
 
-export function appendToExistingGroupVisualisation(group, shape) {
+export function appendToExistingGroupDisplay(group, shape) {
   const visualisedGroup = groupMenu.querySelector(`#group-${group.id}`);
   if (visualisedGroup) {
     const shapeIdLabel = document.createElement('label');

@@ -1,11 +1,11 @@
-import { clearGroupState, createShapeGroup } from './group-shapes.js';
+import { clearGroupState, createShapeGroup } from './group-tool.js';
 
 export const SELECT_OPEARATION = 'SELECT';
 export const GROUP_OPEARATION = 'GROUP';
 
 export let operation;
 
-export function configureOperationButtons(canvas) {
+export function configureToolButtons(canvas) {
   configureSelectButton();
   configureGroupButton(canvas);
 }

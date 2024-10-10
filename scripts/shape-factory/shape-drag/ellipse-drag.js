@@ -1,4 +1,4 @@
-import appendEllipseToCanvas from '../shape-factory/ellipse.js';
+import appendEllipseToCanvas from '../ellipse.js';
 
 export const ellipseDragFunctions = {
   onMouseDown: createEllipse,

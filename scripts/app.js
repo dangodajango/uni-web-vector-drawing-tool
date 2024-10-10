@@ -1,6 +1,6 @@
 import configureCanvas from './canvas/canvas-configuration.js';
-import { configureOperationButtons } from './operation-menu/operation-buttons-configuration.js';
-import configureShapeButtons from './shape-button-menu/shape-buttons-configuration.js';
+import { configureToolButtons } from './canvas-toolbar/tools-configuration.js';
+import configureShapeButtons from './drawing-tools/drawing-tools-configuration.js';
 
 const canvas = document.getElementById('canvas');
 
@@ -12,5 +12,5 @@ function clearCanvas(canvas) {
 }
 
 configureShapeButtons();
-configureOperationButtons(canvas);
+configureToolButtons(canvas);
 configureCanvas();

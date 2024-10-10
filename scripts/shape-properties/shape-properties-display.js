@@ -1,28 +1,28 @@
 import modifyPropertyOfShape from './shape-property-modifier.js';
 
-const shapePropertiesMenu = document.getElementById('shape-properties');
+const shapePropertiesDOM = document.getElementById('shape-properties');
 
-export default function visualiseShapeProperties(shapeId, shapeProperties) {
+export default function displayShapeProperties(shapeId, shapeProperties) {
   clearPreviousSelection();
-  displayShapeId(shapePropertiesMenu, shapeId);
+  displayShapeId(shapeId);
   for (const property in shapeProperties) {
     const div = document.createElement('div');
     const input = createInputElement(shapeId, shapeProperties, property);
     const label = createLabelElement(shapeProperties[property], input);
     div.append(label, input);
-    shapePropertiesMenu.append(div);
+    shapePropertiesDOM.append(div);
   }
 }
 
 function clearPreviousSelection() {
-  shapePropertiesMenu.innerHTML = '';
+  shapePropertiesDOM.innerHTML = '';
 }
 
-function displayShapeId(shapePropertiesMenu, shapeId) {
+function displayShapeId(shapeId) {
   const div = document.createElement('div');
   const label = `Shape ID: ${shapeId}`;
   div.append(label);
-  shapePropertiesMenu.append(div);
+  shapePropertiesDOM.append(div);
 }
 
 function createInputElement(shapeId, shapeProperties, property) {
