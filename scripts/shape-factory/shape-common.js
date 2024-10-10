@@ -3,7 +3,7 @@ export function configureCommonSvgAttributes(svgElement, fill, stroke) {
   svgElement.setAttribute('stroke', stroke);
 }
 
-export function getCommongShapeProperties(shape) {
+export function getCommonShapeProperties(shape) {
   return {
     stroke: {
       value: shape.getAttribute('stroke'),

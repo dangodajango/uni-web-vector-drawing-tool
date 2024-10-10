@@ -1,10 +1,14 @@
 import {
   configureCommonSvgAttributes,
-  getCommongShapeProperties,
-} from './generic-shape-cofiguration.js';
+  getCommonShapeProperties,
+} from './shape-common.js';
 import { canvas } from '../canvas/canvas-configuration.js';
 import { selectShape } from '../operation-menu/select-shape.js';
-import { GROUP_OPEARATION, operation, SELECT_OPEARATION } from '../operation-menu/operation-buttons-configuration.js';
+import {
+  GROUP_OPEARATION,
+  operation,
+  SELECT_OPEARATION,
+} from '../operation-menu/operation-buttons-configuration.js';
 import { appendShapeToGroup } from '../operation-menu/group-shapes.js';
 
 export default function appendEllipseToCanvas(coordinates, radius) {
@@ -65,7 +69,7 @@ function selectEllipse(ellipseElement) {
       type: 'number',
       displayName: 'Radius - Y',
     },
-    ...getCommongShapeProperties(ellipseElement),
+    ...getCommonShapeProperties(ellipseElement),
   };
   selectShape(ellipseElement, ellipseProperties);
 }

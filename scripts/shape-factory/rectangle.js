@@ -1,7 +1,7 @@
 import {
   configureCommonSvgAttributes,
-  getCommongShapeProperties,
-} from './generic-shape-cofiguration.js';
+  getCommonShapeProperties,
+} from './shape-common.js';
 import { canvas } from '../canvas/canvas-configuration.js';
 import {
   GROUP_OPEARATION,
@@ -69,7 +69,7 @@ function selectRectangle(rectangleElement) {
       type: 'number',
       displayName: 'Height',
     },
-    ...getCommongShapeProperties(rectangleElement),
+    ...getCommonShapeProperties(rectangleElement),
   };
   selectShape(rectangleElement, rectangleProperties);
 }
