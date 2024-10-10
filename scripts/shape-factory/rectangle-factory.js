@@ -3,11 +3,15 @@ import {
   getCommongShapeProperties,
 } from './generic-shape-cofiguration.js';
 import { canvas } from '../canvas/canvas-configuration.js';
-import { operation } from '../operation-menu/operation-buttons-configuration.js';
+import {
+  GROUP_OPEARATION,
+  operation,
+  SELECT_OPEARATION,
+} from '../operation-menu/operation-buttons-configuration.js';
 import { selectShape } from '../operation-menu/select-shape.js';
+import { appendShapeToGroup } from '../operation-menu/group-shapes.js';
 
 export default function appendRectangleToCanvas(coordiantes, sidesLength) {
-  console.log(coordiantes, canvas, sidesLength);
   const rectangleElement = createRectangleElement(coordiantes, sidesLength);
   canvas.appendChild(rectangleElement);
   return rectangleElement;
@@ -33,8 +37,11 @@ function createRectangleElement(coordiantes, sidesLength) {
 function configureOnClickEventListener(rectangleElement) {
   rectangleElement.addEventListener('click', () => {
     switch (operation) {
-      case 'SELECT':
+      case SELECT_OPEARATION:
         selectRectangle(rectangleElement);
+        break;
+      case GROUP_OPEARATION:
+        appendShapeToGroup(rectangleElement);
         break;
     }
   });

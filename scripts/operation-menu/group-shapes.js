@@ -1,4 +1,7 @@
-import visualiseGroup from '../group-menu/group-visualiser.js';
+import {
+  appendToExistingGroupVisualisation,
+  createGroupVisualisation,
+} from '../group-menu/group-visualiser.js';
 import { canvas } from '../canvas/canvas-configuration.js';
 
 let group;
@@ -7,7 +10,7 @@ export function createShapeGroup() {
   group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   group.id = Date.now();
   canvas.append(group);
-  visualiseGroup(group);
+  createGroupVisualisation(group);
 }
 
 export function appendShapeToGroup(shape) {
@@ -16,7 +19,7 @@ export function appendShapeToGroup(shape) {
   }
   canvas.removeChild(shape);
   group.append(shape);
-  visualiseGroup(group);
+  appendToExistingGroupVisualisation(group, shape);
 }
 
 export function clearGroupState() {

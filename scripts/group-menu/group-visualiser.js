@@ -1,15 +1,12 @@
 const groupMenu = document.getElementById('group-menu');
 
-export default function visualiseGroup(group) {
-  const visualisedGroup = groupMenu.querySelector(`#group-${group.id}`);
-  if (visualisedGroup) {
-    visualiseShapesInGroup(group, visualisedGroup);
-  } else {
-    createGroupVisualisation(group);
-  }
-}
-
-function createGroupVisualisation(group) {
+/**
+ * <div id="group-...">
+ *    <label>Group ID: ...</label
+ *    <section></section>
+ * </div>
+ */
+export function createGroupVisualisation(group) {
   const div = document.createElement('div');
   div.id = `group-${group.id}`;
 
@@ -17,17 +14,18 @@ function createGroupVisualisation(group) {
   groupIdLabel.textContent = group.id;
   div.append(groupIdLabel);
 
-  visualiseShapesInGroup(group, div);
+  const shapesSection = document.createElement('section');
+  div.append(shapesSection);
 
   groupMenu.append(div);
 }
 
-function visualiseShapesInGroup(group, div) {
-  for (const shape of group.children) {
-    console.log(shape);
-
+export function appendToExistingGroupVisualisation(group, shape) {
+  const visualisedGroup = groupMenu.querySelector(`#group-${group.id}`);
+  if (visualisedGroup) {
     const shapeIdLabel = document.createElement('label');
     shapeIdLabel.textContent = `Shape ID: ${shape.id}`;
-    div.append(shapeIdLabel);
+    const shapeSection = visualisedGroup.querySelector('section');
+    shapeSection.append(shapeIdLabel);
   }
 }

@@ -4,11 +4,10 @@ import {
 } from './generic-shape-cofiguration.js';
 import { canvas } from '../canvas/canvas-configuration.js';
 import { selectShape } from '../operation-menu/select-shape.js';
-import { operation } from '../operation-menu/operation-buttons-configuration.js';
+import { GROUP_OPEARATION, operation, SELECT_OPEARATION } from '../operation-menu/operation-buttons-configuration.js';
 import { appendShapeToGroup } from '../operation-menu/group-shapes.js';
 
 export default function appendEllipseToCanvas(coordinates, radius) {
-  console.log(coordinates, canvas, radius);
   const ellipseElement = createEllipseElement(coordinates, radius);
   canvas.appendChild(ellipseElement);
   return ellipseElement;
@@ -34,10 +33,10 @@ function createEllipseElement(coordinates, radius) {
 function configureOnClickEventListener(ellipseElement) {
   ellipseElement.addEventListener('click', () => {
     switch (operation) {
-      case 'SELECT':
+      case SELECT_OPEARATION:
         selectEllipse(ellipseElement);
         break;
-      case 'GROUP':
+      case GROUP_OPEARATION:
         appendShapeToGroup(ellipseElement);
         break;
     }
