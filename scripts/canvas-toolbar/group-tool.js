@@ -14,7 +14,7 @@ export function createShapeGroup() {
 }
 
 export function appendShapeToGroup(shape) {
-  if (group.contains(shape)) {
+  if (isShapePartOfAnyGroup(shape)) {
     return;
   }
   canvas.removeChild(shape);
@@ -22,6 +22,12 @@ export function appendShapeToGroup(shape) {
   appendToExistingGroupDisplay(group, shape);
 }
 
-export function clearGroupState() {
-  group = null;
+function isShapePartOfAnyGroup(shape) {
+  const groups = canvas.querySelectorAll('g');
+  for (const group of groups) {
+    if (group.querySelector(`#${shape.id}`)) {
+      return true;
+    }
+  }
+  return false;
 }

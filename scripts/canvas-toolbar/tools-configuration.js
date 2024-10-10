@@ -1,4 +1,4 @@
-import { clearGroupState, createShapeGroup } from './group-tool.js';
+import { createShapeGroup } from './group-tool.js';
 
 export const SELECT_OPEARATION = 'SELECT';
 export const GROUP_OPEARATION = 'GROUP';
@@ -24,7 +24,6 @@ function configureGroupButton(canvas) {
   groupShapesButton.addEventListener('click', () => {
     if (operation === GROUP_OPEARATION) {
       operation = null;
-      clearGroupState();
     } else {
       createShapeGroup(canvas);
       operation = GROUP_OPEARATION;

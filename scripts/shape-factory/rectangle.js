@@ -24,7 +24,7 @@ function createRectangleElement(coordiantes, sidesLength) {
     'http://www.w3.org/2000/svg',
     'rect'
   );
-  rectangleElement.id = Date.now();
+  rectangleElement.id = `rectangle-${Date.now()}`;
   rectangleElement.setAttribute('x', coordiantes.x);
   rectangleElement.setAttribute('y', coordiantes.y);
   rectangleElement.setAttribute('width', sidesLength.width);

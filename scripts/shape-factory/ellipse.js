@@ -24,7 +24,7 @@ function createEllipseElement(coordinates, radius) {
     'http://www.w3.org/2000/svg',
     'ellipse'
   );
-  ellipseElement.id = Date.now();
+  ellipseElement.id = `ellipse-${Date.now()}`;
   ellipseElement.setAttribute('cx', coordinates.x);
   ellipseElement.setAttribute('cy', coordinates.y);
   ellipseElement.setAttribute('rx', radius.x);
