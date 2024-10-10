@@ -3,8 +3,8 @@ import {
   getCommongShapeProperties,
 } from './generic-shape-cofiguration.js';
 import { canvas } from '../canvas/canvas-configuration.js';
-import { opearation } from '../opearations-menu/operation-buttons-configuration.js';
-import { selectShape } from '../opearations-menu/select-shape.js';
+import { operation } from '../operation-menu/operation-buttons-configuration.js';
+import { selectShape } from '../operation-menu/select-shape.js';
 
 export default function appendRectangleToCanvas(coordiantes, sidesLength) {
   console.log(coordiantes, canvas, sidesLength);
@@ -32,7 +32,7 @@ function createRectangleElement(coordiantes, sidesLength) {
 
 function configureOnClickEventListener(rectangleElement) {
   rectangleElement.addEventListener('click', () => {
-    switch (opearation) {
+    switch (operation) {
       case 'SELECT':
         selectRectangle(rectangleElement);
         break;

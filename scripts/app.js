@@ -1,5 +1,5 @@
 import configureCanvas from './canvas/canvas-configuration.js';
-import { configureOperationButtons } from './opearations-menu/operation-buttons-configuration.js';
+import { configureOperationButtons } from './operation-menu/operation-buttons-configuration.js';
 import configureShapeButtons from './shape-button-menu/shape-buttons-configuration.js';
 
 const canvas = document.getElementById('canvas');
@@ -12,5 +12,5 @@ function clearCanvas(canvas) {
 }
 
 configureShapeButtons();
-configureOperationButtons();
+configureOperationButtons(canvas);
 configureCanvas();
