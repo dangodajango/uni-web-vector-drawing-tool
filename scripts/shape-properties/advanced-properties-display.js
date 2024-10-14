@@ -2,7 +2,7 @@ export default function displayAdvancedProperties(shape) {
   const shapePropertiesDOM = document.getElementById('shape-properties');
   const advancedShapeProperties = getAdvancedShapeProperties(shape);
   const advancedPropertiesSection = document.createElement('section');
-  test(advancedPropertiesSection, advancedShapeProperties);
+  createAdvancedPropertiesHTML(advancedPropertiesSection, advancedShapeProperties);
   shapePropertiesDOM.append(advancedPropertiesSection);
 }
 
@@ -74,32 +74,32 @@ function extractTransformProperty(shape, property) {
   return result.split(', ');
 }
 
-function test(advancedPropertiesSection, advancedShapeProperties) {
+function createAdvancedPropertiesHTML(
+  advancedPropertiesSection,
+  advancedShapeProperties
+) {
   for (const propertyKey in advancedShapeProperties) {
     const property = advancedShapeProperties[propertyKey];
     const div = document.createElement('div');
     if ('parameters' in property) {
-      test2(div, property.parameters);
+      createNestedPropertiesHTML(div, property.parameters, property.displayName);
     } else {
-      console.log(property.value);
-      test3(div, property);
+      createPropertiesHTML(div, property);
     }
     advancedPropertiesSection.append(div);
   }
 }
 
-function test2(div, parameters) {
+function createNestedPropertiesHTML(div, parameters, rootDisplayName) {
+  const label = document.createElement('label');
+  label.textContent = rootDisplayName;
+  div.append(label);
   for (const parameter in parameters) {
-    const label = document.createElement('label');
-    label.textContent = parameters[parameter].displayName;
-    const input = document.createElement('input');
-    input.value = parameters[parameter].value;
-    input.type = parameters[parameter].type;
-    div.append(label, input);
+    createPropertiesHTML(div, parameters[parameter]);
   }
 }
 
-function test3(div, property) {
+function createPropertiesHTML(div, property) {
   const label = document.createElement('label');
   label.textContent = property.displayName;
   const input = document.createElement('input');
