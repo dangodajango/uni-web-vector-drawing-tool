@@ -116,8 +116,9 @@ function createNestedPropertiesHTML(div, property, shapeId) {
 }
 
 function createNestedPropertyHTML(div, parentProperty, childProperty, shapeId) {
-  const label = createLabel(childProperty.displayName);
-  const input = createInput(childProperty.value, childProperty.type);
+  const inputId = `advanced-${parentProperty.displayName}-${childProperty.displayName}-${shapeId}`;
+  const label = createLabel(childProperty.displayName, inputId);
+  const input = createInput(childProperty.value, childProperty.type, inputId);
   configureNestedPropertyInputEventListener(
     input,
     parentProperty,
@@ -135,14 +136,20 @@ function configureNestedPropertyInputEventListener(
 ) {
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-      modifyNestedAdvancedPropertyOfShape(shapeId, parentProperty, childProperty, event.target.value);
+      modifyNestedAdvancedPropertyOfShape(
+        shapeId,
+        parentProperty,
+        childProperty,
+        event.target.value
+      );
     }
   });
 }
 
 function createRootPropertyHTML(div, property, shapeId) {
-  const label = createLabel(property.displayName);
-  const input = createInput(property.value, property.type);
+  const inputId = `advanced-${property.displayName}-${shapeId}`;
+  const label = createLabel(property.displayName, inputId);
+  const input = createInput(property.value, property.type, inputId);
   configureRootPropertyInputEventListener(input, property, shapeId);
   div.append(label, input);
 }

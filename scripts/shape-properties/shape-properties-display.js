@@ -27,7 +27,7 @@ function displayShapeId(shapeId) {
 
 function createInputElement(shapeId, shapeProperties, property) {
   const input = document.createElement('input');
-  input.id = `${property}`;
+  input.id = `${property}-${shapeId}`;
   input.value = shapeProperties[property].value;
   input.type = shapeProperties[property].type;
   createEventListenerForInputElements(shapeId, input, property);
