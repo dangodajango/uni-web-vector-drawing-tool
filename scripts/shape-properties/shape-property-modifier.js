@@ -1,6 +1,13 @@
-// The properties of each shape are transformed to attributes of the corresponding SVG element.
-// Shape property = SVG element attribute.
-export default function modifyPropertyOfShape(shapeId, property, updatedValue) {
+export function modifyPropertyOfShape(shapeId, property, updatedValue) {
   const shape = document.getElementById(shapeId);
   shape.setAttribute(property, updatedValue);
+}
+
+export function modifyRootAdvancedPropertyOfShape(shapeId, property, updatedValue) {
+  console.log(shapeId, property, updatedValue);
+}
+
+export function modifyNestedAdvancedPropertyOfShape(shapeId, parentProperty, childProperty, updatedValue) {
+  console.log(shapeId, parentProperty, childProperty, updatedValue);
+  
 }

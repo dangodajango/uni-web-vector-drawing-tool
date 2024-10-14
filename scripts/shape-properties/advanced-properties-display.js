@@ -1,8 +1,18 @@
+import { createInput, createLabel } from '../utils/common-utils.js';
+import {
+  modifyNestedAdvancedPropertyOfShape,
+  modifyRootAdvancedPropertyOfShape,
+} from './shape-property-modifier.js';
+
 export default function displayAdvancedProperties(shape) {
   const shapePropertiesDOM = document.getElementById('shape-properties');
   const advancedShapeProperties = getAdvancedShapeProperties(shape);
   const advancedPropertiesSection = document.createElement('section');
-  createAdvancedPropertiesHTML(advancedPropertiesSection, advancedShapeProperties);
+  createAdvancedPropertiesHTML(
+    advancedPropertiesSection,
+    advancedShapeProperties,
+    shape.id
+  );
   shapePropertiesDOM.append(advancedPropertiesSection);
 }
 
@@ -18,7 +28,7 @@ function extractTranslateProperty(shape) {
   const translateProperties = extractTransformProperty(shape, 'translate');
   return {
     translate: {
-      parameters: {
+      nastedProperties: {
         x: {
           value: translateProperties[0],
           type: 'number',
@@ -50,7 +60,7 @@ function extractScaleProperty(shape) {
   const scaleProperties = extractTransformProperty(shape, 'scale');
   return {
     scale: {
-      parameters: {
+      nastedProperties: {
         x: {
           value: scaleProperties[0],
           type: 'number',
@@ -76,34 +86,71 @@ function extractTransformProperty(shape, property) {
 
 function createAdvancedPropertiesHTML(
   advancedPropertiesSection,
-  advancedShapeProperties
+  advancedShapeProperties,
+  shapeId
 ) {
   for (const propertyKey in advancedShapeProperties) {
     const property = advancedShapeProperties[propertyKey];
     const div = document.createElement('div');
-    if ('parameters' in property) {
-      createNestedPropertiesHTML(div, property.parameters, property.displayName);
+    if ('nastedProperties' in property) {
+      createNestedPropertiesHTML(div, property, shapeId);
     } else {
-      createPropertiesHTML(div, property);
+      createRootPropertyHTML(div, property, shapeId);
     }
     advancedPropertiesSection.append(div);
   }
 }
 
-function createNestedPropertiesHTML(div, parameters, rootDisplayName) {
+function createNestedPropertiesHTML(div, property, shapeId) {
   const label = document.createElement('label');
-  label.textContent = rootDisplayName;
+  label.textContent = property.displayName;
   div.append(label);
-  for (const parameter in parameters) {
-    createPropertiesHTML(div, parameters[parameter]);
+  for (const nestedProperty in property.nastedProperties) {
+    createNestedPropertyHTML(
+      div,
+      property,
+      property.nastedProperties[nestedProperty],
+      shapeId
+    );
   }
 }
 
-function createPropertiesHTML(div, property) {
-  const label = document.createElement('label');
-  label.textContent = property.displayName;
-  const input = document.createElement('input');
-  input.value = property.value;
-  input.type = property.type;
+function createNestedPropertyHTML(div, parentProperty, childProperty, shapeId) {
+  const label = createLabel(childProperty.displayName);
+  const input = createInput(childProperty.value, childProperty.type);
+  configureNestedPropertyInputEventListener(
+    input,
+    parentProperty,
+    childProperty,
+    shapeId
+  );
   div.append(label, input);
+}
+
+function configureNestedPropertyInputEventListener(
+  input,
+  parentProperty,
+  childProperty,
+  shapeId
+) {
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      modifyNestedAdvancedPropertyOfShape(shapeId, parentProperty, childProperty, event.target.value);
+    }
+  });
+}
+
+function createRootPropertyHTML(div, property, shapeId) {
+  const label = createLabel(property.displayName);
+  const input = createInput(property.value, property.type);
+  configureRootPropertyInputEventListener(input, property, shapeId);
+  div.append(label, input);
+}
+
+function configureRootPropertyInputEventListener(input, property, shapeId) {
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      modifyRootAdvancedPropertyOfShape(shapeId, property, event.target.value);
+    }
+  });
 }

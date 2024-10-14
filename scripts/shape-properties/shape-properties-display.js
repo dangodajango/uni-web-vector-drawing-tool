@@ -1,4 +1,4 @@
-import modifyPropertyOfShape from './shape-property-modifier.js';
+import { modifyPropertyOfShape } from './shape-property-modifier.js';
 
 const shapePropertiesDOM = document.getElementById('shape-properties');
 
