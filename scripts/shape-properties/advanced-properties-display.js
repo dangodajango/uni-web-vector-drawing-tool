@@ -1,163 +1,125 @@
 import { createInput, createLabel } from '../utils/common-utils.js';
-import {
-  modifyNestedAdvancedPropertyOfShape,
-  modifyRootAdvancedPropertyOfShape,
-} from './shape-property-modifier.js';
+import enrichProperty from './advanced-properties-enrichment.js';
+import { modifyAdvancedPropertyOfShape } from './shape-property-modifier.js';
 
 export default function displayAdvancedProperties(shape) {
   const shapePropertiesDOM = document.getElementById('shape-properties');
-  const advancedShapeProperties = getAdvancedShapeProperties(shape);
   const advancedPropertiesSection = document.createElement('section');
-  createAdvancedPropertiesHTML(
-    advancedPropertiesSection,
-    advancedShapeProperties,
-    shape.id
-  );
+  createAdvancedPropertiesHtml(shape, advancedPropertiesSection);
   shapePropertiesDOM.append(advancedPropertiesSection);
 }
 
-function getAdvancedShapeProperties(shape) {
-  return {
-    ...extractTranslateProperty(shape),
-    ...extractRotateProperty(shape),
-    ...extractScaleProperty(shape),
-  };
+function createAdvancedPropertiesHtml(shape, advancedPropertiesSection) {
+  createTranslate(shape, advancedPropertiesSection);
+  createRotate(shape, advancedPropertiesSection);
+  createScale(shape, advancedPropertiesSection);
 }
 
-function extractTranslateProperty(shape) {
-  const translateProperties = extractTransformProperty(shape, 'translate');
-  return {
-    translate: {
-      nastedProperties: {
-        x: {
-          value: translateProperties[0],
-          type: 'number',
-          displayName: 'X',
-        },
-        y: {
-          value: translateProperties[1],
-          type: 'number',
-          displayName: 'Y',
-        },
-      },
-      displayName: 'Translate',
-    },
-  };
-}
-
-function extractRotateProperty(shape) {
-  const rotateProperties = extractTransformProperty(shape, 'rotate');
-  return {
-    rotate: {
-      value: rotateProperties[0],
+function createTranslate(shape, advancedPropertiesSection) {
+  const translateDiv = document.createElement('div');
+  appendPropertyTitle(translateDiv, 'Translate');
+  const translateProperties = {
+    'translate-x': {
+      value: extractPropertyValue('translate', shape)[0],
       type: 'number',
-      displayName: 'Rotate',
+      displayName: 'X',
+      eventListenerFunction: modifyTranslate,
+    },
+    'translate-y': {
+      value: extractPropertyValue('translate', shape)[1],
+      type: 'number',
+      displayName: 'Y',
+      eventListenerFunction: modifyTranslate,
     },
   };
+  appendPropertyInputs(translateDiv, translateProperties, shape);
+  advancedPropertiesSection.append(translateDiv);
 }
 
-function extractScaleProperty(shape) {
-  const scaleProperties = extractTransformProperty(shape, 'scale');
-  return {
-    scale: {
-      nastedProperties: {
-        x: {
-          value: scaleProperties[0],
-          type: 'number',
-          displayName: 'X',
-        },
-        y: {
-          value: scaleProperties[1],
-          type: 'number',
-          displayName: 'Y',
-        },
-      },
-      displayName: 'Scale',
+function modifyTranslate(event, shape) {
+  console.dir(event);
+  const newValue = event;
+  const enrichedPropertyValues = enrichProperty(shape, 'translate');
+}
+
+function createRotate(shape, advancedPropertiesSection) {
+  const rotateDiv = document.createElement('div');
+  appendPropertyTitle(rotateDiv, 'Rotate');
+  const rotateProperties = {
+    'rotate-angle': {
+      value: extractPropertyValue('rotate', shape)[0],
+      type: 'number',
+      displayName: 'Degrees',
+      eventListenerFunction: modifyRotate,
     },
   };
+  appendPropertyInputs(rotateDiv, rotateProperties, shape);
+  advancedPropertiesSection.append(rotateDiv);
 }
 
-function extractTransformProperty(shape, property) {
-  const transform = shape.getAttribute('transform');
-  const regex = new RegExp(`${property}\\(([^)]+)\\)`);
-  const result = transform.match(regex)[1];
-  return result.split(', ');
+function modifyRotate(event, shape) {
+  const newValue = event.target.value;
+  const enrichedPropertyValues = enrichProperty(shape, 'rotate');
+  modifyAdvancedPropertyOfShape(shape, 'rotate', [
+    newValue,
+    ...enrichedPropertyValues,
+  ]);
 }
 
-function createAdvancedPropertiesHTML(
-  advancedPropertiesSection,
-  advancedShapeProperties,
-  shapeId
-) {
-  for (const propertyKey in advancedShapeProperties) {
-    const property = advancedShapeProperties[propertyKey];
-    const div = document.createElement('div');
-    if ('nastedProperties' in property) {
-      createNestedPropertiesHTML(div, property, shapeId);
-    } else {
-      createRootPropertyHTML(div, property, shapeId);
-    }
-    advancedPropertiesSection.append(div);
-  }
+function createScale(shape, advancedPropertiesSection) {
+  const scaleDiv = document.createElement('div');
+  appendPropertyTitle(scaleDiv, 'Scale');
+  const scaleProperties = {
+    'scale-x': {
+      value: extractPropertyValue('scale', shape)[0],
+      type: 'number',
+      displayName: 'X',
+      eventListenerFunction: modifyScale,
+    },
+    'scale-y': {
+      value: extractPropertyValue('scale', shape)[1],
+      type: 'number',
+      displayName: 'Y',
+      eventListenerFunction: modifyScale,
+    },
+  };
+  appendPropertyInputs(scaleDiv, scaleProperties, shape);
+  advancedPropertiesSection.append(scaleDiv);
 }
 
-function createNestedPropertiesHTML(div, property, shapeId) {
-  const label = document.createElement('label');
-  label.textContent = property.displayName;
-  div.append(label);
-  for (const nestedProperty in property.nastedProperties) {
-    createNestedPropertyHTML(
-      div,
-      property,
-      property.nastedProperties[nestedProperty],
-      shapeId
+function modifyScale(event, shape) {
+  console.log(shape, event);
+}
+
+function appendPropertyTitle(div, textContent) {
+  const h3 = document.createElement('h3');
+  h3.textContent = textContent;
+  div.append(h3);
+}
+
+function appendPropertyInputs(div, advancedProperties, shape) {
+  for (const propertyKey in advancedProperties) {
+    const property = advancedProperties[propertyKey];
+    const input = createInput(
+      property.value,
+      property.type,
+      `${propertyKey}-${shape.id}`
     );
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        property.eventListenerFunction.call(this, event, shape);
+      }
+    });
+    const label = createLabel(property.displayName, input.id);
+    div.append(label, input);
   }
 }
 
-function createNestedPropertyHTML(div, parentProperty, childProperty, shapeId) {
-  const inputId = `advanced-${parentProperty.displayName}-${childProperty.displayName}-${shapeId}`;
-  const label = createLabel(childProperty.displayName, inputId);
-  const input = createInput(childProperty.value, childProperty.type, inputId);
-  configureNestedPropertyInputEventListener(
-    input,
-    parentProperty,
-    childProperty,
-    shapeId
-  );
-  div.append(label, input);
-}
-
-function configureNestedPropertyInputEventListener(
-  input,
-  parentProperty,
-  childProperty,
-  shapeId
-) {
-  input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      modifyNestedAdvancedPropertyOfShape(
-        shapeId,
-        parentProperty,
-        childProperty,
-        event.target.value
-      );
-    }
-  });
-}
-
-function createRootPropertyHTML(div, property, shapeId) {
-  const inputId = `advanced-${property.displayName}-${shapeId}`;
-  const label = createLabel(property.displayName, inputId);
-  const input = createInput(property.value, property.type, inputId);
-  configureRootPropertyInputEventListener(input, property, shapeId);
-  div.append(label, input);
-}
-
-function configureRootPropertyInputEventListener(input, property, shapeId) {
-  input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      modifyRootAdvancedPropertyOfShape(shapeId, property, event.target.value);
-    }
-  });
+function extractPropertyValue(property, shape) {
+  const transformAttribute = shape.getAttribute('transform');
+  const extractPropertyRegex = new RegExp(`${property}\\(([^)]+)\\)`);
+  const propertyMatch = transformAttribute.match(extractPropertyRegex);
+  if (propertyMatch) {
+    return propertyMatch[1].split(', ');
+  }
 }
