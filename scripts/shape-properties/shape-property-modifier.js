@@ -1,5 +1,3 @@
-import enrichProperty from './advanced-properties-enrichment.js';
-
 export function modifyPropertyOfShape(shapeId, property, updatedValue) {
   const shape = document.getElementById(shapeId);
   shape.setAttribute(property, updatedValue);

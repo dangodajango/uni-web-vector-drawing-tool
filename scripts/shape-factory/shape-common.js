@@ -1,7 +1,7 @@
 export function configureCommonSvgAttributes(svgElement, fill, stroke) {
   svgElement.setAttribute('fill', fill);
   svgElement.setAttribute('stroke', stroke);
-  svgElement.setAttribute('transform', 'translate(0, 0) rotate(0) scale(1, 1)');
+  svgElement.setAttribute('transform', 'translate(0,0) rotate(0) scale(1,1)');
 }
 
 export function getCommonShapeProperties(shape) {

@@ -37,9 +37,20 @@ function createTranslate(shape, advancedPropertiesSection) {
 }
 
 function modifyTranslate(event, shape) {
-  console.dir(event);
-  const newValue = event;
-  const enrichedPropertyValues = enrichProperty(shape, 'translate');
+  const inputId = event.target.id;
+  const translateValues = extractPropertyValue('translate', shape);
+  const newValue = event.target.value;
+  if (inputId.includes('x')) {
+    modifyAdvancedPropertyOfShape(shape, 'translate', [
+      newValue,
+      translateValues[1],
+    ]);
+  } else {
+    modifyAdvancedPropertyOfShape(shape, 'translate', [
+      translateValues[0],
+      newValue,
+    ]);
+  }
 }
 
 function createRotate(shape, advancedPropertiesSection) {
@@ -120,6 +131,6 @@ function extractPropertyValue(property, shape) {
   const extractPropertyRegex = new RegExp(`${property}\\(([^)]+)\\)`);
   const propertyMatch = transformAttribute.match(extractPropertyRegex);
   if (propertyMatch) {
-    return propertyMatch[1].split(', ');
+    return propertyMatch[1].split(',');
   }
 }
