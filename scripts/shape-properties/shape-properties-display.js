@@ -4,25 +4,26 @@ const shapePropertiesDOM = document.getElementById('shape-properties');
 
 export default function displayShapeProperties(shapeId, shapeProperties) {
   clearPreviousSelection();
-  displayShapeId(shapeId);
+  const proeprtiesSection = document.createElement('section');
+  displayShapeId(shapeId, proeprtiesSection);
   for (const property in shapeProperties) {
     const div = document.createElement('div');
     const input = createInputElement(shapeId, shapeProperties, property);
     const label = createLabelElement(shapeProperties[property], input);
     div.append(label, input);
-    shapePropertiesDOM.append(div);
+    proeprtiesSection.append(div);
   }
+  shapePropertiesDOM.append(proeprtiesSection);
 }
 
 function clearPreviousSelection() {
   shapePropertiesDOM.innerHTML = '';
 }
 
-function displayShapeId(shapeId) {
-  const div = document.createElement('div');
-  const label = `Shape ID: ${shapeId}`;
-  div.append(label);
-  shapePropertiesDOM.append(div);
+function displayShapeId(shapeId, proeprtiesSection) {
+  const h3 = document.createElement('h3');
+  h3.textContent = `Shape ID: ${shapeId}`;
+  proeprtiesSection.append(h3);
 }
 
 function createInputElement(shapeId, shapeProperties, property) {
