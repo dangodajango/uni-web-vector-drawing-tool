@@ -10,12 +10,12 @@ export default function displayAdvancedProperties(shape) {
 }
 
 function createAdvancedPropertiesHtml(shape, advancedPropertiesSection) {
-  createTranslate(shape, advancedPropertiesSection);
-  createRotate(shape, advancedPropertiesSection);
-  createScale(shape, advancedPropertiesSection);
+  createTranslateHtml(shape, advancedPropertiesSection);
+  createRotateHtml(shape, advancedPropertiesSection);
+  createScaleHtml(shape, advancedPropertiesSection);
 }
 
-function createTranslate(shape, advancedPropertiesSection) {
+function createTranslateHtml(shape, advancedPropertiesSection) {
   const translateDiv = document.createElement('div');
   appendPropertyTitle(translateDiv, 'Translate');
   const translateProperties = {
@@ -53,7 +53,7 @@ function modifyTranslate(event, shape) {
   }
 }
 
-function createRotate(shape, advancedPropertiesSection) {
+function createRotateHtml(shape, advancedPropertiesSection) {
   const rotateDiv = document.createElement('div');
   appendPropertyTitle(rotateDiv, 'Rotate');
   const rotateProperties = {
@@ -77,7 +77,7 @@ function modifyRotate(event, shape) {
   ]);
 }
 
-function createScale(shape, advancedPropertiesSection) {
+function createScaleHtml(shape, advancedPropertiesSection) {
   const scaleDiv = document.createElement('div');
   appendPropertyTitle(scaleDiv, 'Scale');
   const scaleProperties = {
@@ -99,7 +99,20 @@ function createScale(shape, advancedPropertiesSection) {
 }
 
 function modifyScale(event, shape) {
-  console.log(shape, event);
+  const inputId = event.target.id;
+  const scaleValues = extractPropertyValue('scale', shape);
+  const newValue = event.target.value;
+  if (inputId.includes('x')) {
+    modifyAdvancedPropertyOfShape(shape, 'scale', [
+      newValue,
+      scaleValues[1],
+    ]);
+  } else {
+    modifyAdvancedPropertyOfShape(shape, 'scale', [
+      scaleValues[0],
+      newValue,
+    ]);
+  }
 }
 
 function appendPropertyTitle(div, textContent) {
