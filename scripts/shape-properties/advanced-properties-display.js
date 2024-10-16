@@ -1,4 +1,4 @@
-import { createInput, createLabel } from '../utils/common-utils.js';
+import { createInput, createLabel } from '../utils/properties-utils.js';
 import enrichProperty from './advanced-properties-enrichment.js';
 import { modifyAdvancedPropertyOfShape } from './shape-property-modifier.js';
 
@@ -125,7 +125,7 @@ function appendPropertyInputs(div, advancedProperties, shape) {
   for (const propertyKey in advancedProperties) {
     const property = advancedProperties[propertyKey];
     const input = createInput(
-      property.value,
+      property.value.split(',')[0],
       property.type,
       `${propertyKey}-${shape.id}`
     );

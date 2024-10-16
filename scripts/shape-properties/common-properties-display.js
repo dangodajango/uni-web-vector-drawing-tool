@@ -1,5 +1,7 @@
-import { createLabel } from '../utils/common-utils.js';
-import { modifyPropertyOfShape } from './shape-property-modifier.js';
+import {
+  createEventListenerForInputElements,
+  createLabel,
+} from '../utils/properties-utils.js';
 
 const shapePropertiesDOM = document.getElementById('shape-properties');
 
@@ -32,20 +34,6 @@ function createInput(value, type, inputId) {
   input.value = value;
   input.type = type;
   return input;
-}
-
-function createEventListenerForInputElements(shapeId, input, property) {
-  if (input.type === 'color') {
-    input.addEventListener('change', (event) => {
-      modifyPropertyOfShape(shapeId, property, event.target.value);
-    });
-  } else {
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        modifyPropertyOfShape(shapeId, property, event.target.value);
-      }
-    });
-  }
 }
 
 function getCommonShapeProperties(shape) {
