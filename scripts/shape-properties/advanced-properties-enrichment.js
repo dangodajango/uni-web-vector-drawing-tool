@@ -9,12 +9,12 @@ function enrichRotate(shape) {
   const shapeId = shape.id;
   if (/^ellipse-\d+$/.test(shapeId)) {
     return [shape.getAttribute('cx'), shape.getAttribute('cy')];
-  } else if (/^rectangle-\d+$/.test(shapeId)) {
-    return calculateRotateAngleOfRectangle(shape);
+  } else if (/^rectangle-\d+$/.test(shapeId) || /^group-\d+$/.test(shapeId)) {
+    return calculateRotateAngleBoundingBox(shape);
   }
 }
 
-function calculateRotateAngleOfRectangle(shape) {
+function calculateRotateAngleBoundingBox(shape) {
   const boundingBox = shape.getBBox();
   const cx = boundingBox.x + boundingBox.width / 2;
   const cy = boundingBox.y + boundingBox.height / 2;

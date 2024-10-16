@@ -5,5 +5,9 @@ import displayShapeProperties from '../shape-properties/shape-properties-display
 export function selectShape(shape, shapeProperties) {
   displayShapeProperties(shape.id, shapeProperties);
   displayCommonProperties(shape);
-  displayAdvancedProperties(shape);
+  displayAdvancedProperties(shape, document.getElementById('shape-properties'));
+}
+
+export function selectGroup(group) {
+  displayAdvancedProperties(group, group);
 }

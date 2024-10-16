@@ -1,3 +1,5 @@
+import displayAdvancedProperties from '../shape-properties/advanced-properties-display.js';
+
 const groupMenu = document.getElementById('shape-groups');
 
 /**
@@ -9,14 +11,12 @@ const groupMenu = document.getElementById('shape-groups');
 export function createGroupDisplay(group) {
   const div = document.createElement('div');
   div.id = `group-${group.id}`;
-
   const groupIdLabel = document.createElement('label');
   groupIdLabel.textContent = group.id;
   div.append(groupIdLabel);
-
+  displayAdvancedProperties(group, div);
   const shapesSection = document.createElement('section');
   div.append(shapesSection);
-
   groupMenu.append(div);
 }
 

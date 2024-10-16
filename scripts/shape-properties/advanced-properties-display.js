@@ -1,12 +1,11 @@
 import { createInput, createLabel } from '../utils/properties-utils.js';
 import enrichProperty from './advanced-properties-enrichment.js';
-import { modifyAdvancedPropertyOfShape } from './shape-property-modifier.js';
+import { modifyAdvancedPropertyOfShape } from './property-modifier.js';
 
-export default function displayAdvancedProperties(shape) {
-  const shapePropertiesDOM = document.getElementById('shape-properties');
+export default function displayAdvancedProperties(shape, propertiesDOM) {
   const advancedPropertiesSection = document.createElement('section');
   createAdvancedPropertiesHtml(shape, advancedPropertiesSection);
-  shapePropertiesDOM.append(advancedPropertiesSection);
+  propertiesDOM.append(advancedPropertiesSection);
 }
 
 function createAdvancedPropertiesHtml(shape, advancedPropertiesSection) {

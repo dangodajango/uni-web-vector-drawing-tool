@@ -1,4 +1,4 @@
-import { modifyPropertyOfShape } from '../shape-properties/shape-property-modifier.js';
+import { modifyPropertyOfShape } from '../shape-properties/property-modifier.js';
 
 export function createLabel(textContent, inputId) {
   const label = document.createElement('label');

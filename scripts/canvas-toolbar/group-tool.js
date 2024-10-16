@@ -8,7 +8,8 @@ let group;
 
 export function createShapeGroup() {
   group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-  group.id = Date.now();
+  group.setAttribute('transform', 'translate(0,0) rotate(0) scale(1,1)');
+  group.id = `group-${Date.now()}`;
   canvas.append(group);
   createGroupDisplay(group);
 }
