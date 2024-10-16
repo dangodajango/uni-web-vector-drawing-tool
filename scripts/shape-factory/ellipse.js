@@ -69,7 +69,6 @@ function selectEllipse(ellipseElement) {
       type: 'number',
       displayName: 'Radius - Y',
     },
-    ...getCommonShapeProperties(ellipseElement),
   };
   selectShape(ellipseElement, ellipseProperties);
 }

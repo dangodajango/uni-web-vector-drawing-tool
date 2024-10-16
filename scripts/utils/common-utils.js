@@ -12,3 +12,4 @@ export function createInput(value, type, inputId) {
   input.type = type;
   return input;
 }
+

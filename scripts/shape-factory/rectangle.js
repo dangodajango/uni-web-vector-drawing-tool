@@ -69,7 +69,6 @@ function selectRectangle(rectangleElement) {
       type: 'number',
       displayName: 'Height',
     },
-    ...getCommonShapeProperties(rectangleElement),
   };
   selectShape(rectangleElement, rectangleProperties);
 }
