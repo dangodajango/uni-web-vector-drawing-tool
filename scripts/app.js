@@ -8,7 +8,11 @@ const clearCanvasButton = document.getElementById('clear-canvas-button');
 clearCanvasButton.addEventListener('click', clearCanvas.bind(this, canvas));
 
 function clearCanvas(canvas) {
+  const shapePropertiesSection = document.getElementById('shape-properties');
+  const shapeGroupsSection = document.getElementById('shape-groups');
   canvas.innerHTML = '';
+  shapePropertiesSection.innerHTML = '';
+  shapeGroupsSection.innerHTML = '';
 }
 
 configureShapeButtons();

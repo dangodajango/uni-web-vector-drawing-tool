@@ -47,7 +47,7 @@ function configureOnClickEventListener(ellipseElement) {
   });
 }
 
-function selectEllipse(ellipseElement) {
+export function selectEllipse(ellipseElement) {
   const ellipseProperties = {
     cx: {
       value: ellipseElement.getAttribute('cx'),

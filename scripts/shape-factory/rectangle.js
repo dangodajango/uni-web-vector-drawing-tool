@@ -47,7 +47,7 @@ function configureOnClickEventListener(rectangleElement) {
   });
 }
 
-function selectRectangle(rectangleElement) {
+export function selectRectangle(rectangleElement) {
   const rectangleProperties = {
     x: {
       value: rectangleElement.getAttribute('x'),
