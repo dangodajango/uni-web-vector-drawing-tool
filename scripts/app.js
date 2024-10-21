@@ -9,10 +9,10 @@ clearCanvasButton.addEventListener('click', clearCanvas.bind(this, canvas));
 
 function clearCanvas(canvas) {
   const shapePropertiesSection = document.getElementById('shape-properties');
-  const shapeGroupsSection = document.getElementById('shape-groups');
+  const groupPanels = document.getElementById('group-panels');
   canvas.innerHTML = '';
   shapePropertiesSection.innerHTML = '';
-  shapeGroupsSection.innerHTML = '';
+  groupPanels.innerHTML = '';
 }
 
 configureShapeButtons();

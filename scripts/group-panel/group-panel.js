@@ -2,6 +2,7 @@ import displayAdvancedProperties from '../shape-properties/advanced-properties-d
 import { selectEllipse } from '../shape-factory/ellipse.js';
 import { selectRectangle } from '../shape-factory/rectangle.js';
 import { ejectShapeFromSvgGroup, removeSvgGroup } from './group.js';
+import { updatedCurrentGroup } from '../canvas-toolbar/group-tool.js';
 
 const groupPanels = document.getElementById('group-panels');
 
@@ -14,9 +15,7 @@ export function createPanelForGroup(group) {
 }
 
 function createPanelStructure(panelForGroup, group) {
-  const panelTitle = document.createElement('h3');
-  panelTitle.textContent = group.id;
-
+  const panelTitle = createPanelTitle(group);
   const deleteGroupButton = createDeleteGroupButton(group, panelForGroup);
 
   const groupProperties = document.createElement('section');
@@ -32,6 +31,13 @@ function createPanelStructure(panelForGroup, group) {
     groupProperties,
     shapesInGroup
   );
+}
+
+function createPanelTitle(group) {
+  const panelTitle = document.createElement('h3');
+  panelTitle.textContent = group.id;
+  panelTitle.addEventListener('click', () => updatedCurrentGroup(group));
+  return panelTitle;
 }
 
 function createDeleteGroupButton(group, panelForGroup) {

@@ -17,6 +17,10 @@ export function appendShapeToGroup(shape) {
   }
 }
 
+export function updatedCurrentGroup(newGroup) {
+  group = newGroup;
+}
+
 export function resetCurrentGroup() {
   group = null;
 }
