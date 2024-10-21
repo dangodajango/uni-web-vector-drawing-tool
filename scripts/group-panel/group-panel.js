@@ -1,7 +1,7 @@
 import displayAdvancedProperties from '../shape-properties/advanced-properties-display.js';
 import { selectEllipse } from '../shape-factory/ellipse.js';
 import { selectRectangle } from '../shape-factory/rectangle.js';
-import { ejectShapeFromSvgGroup } from './group.js';
+import { ejectShapeFromSvgGroup, removeSvgGroup } from './group.js';
 
 const groupPanels = document.getElementById('group-panels');
 
@@ -17,6 +17,8 @@ function createPanelStructure(panelForGroup, group) {
   const panelTitle = document.createElement('h3');
   panelTitle.textContent = group.id;
 
+  const deleteGroupButton = createDeleteGroupButton(group, panelForGroup);
+
   const groupProperties = document.createElement('section');
   groupProperties.id = `properties-of-${group.id}`;
   displayAdvancedProperties(group, groupProperties);
@@ -24,7 +26,22 @@ function createPanelStructure(panelForGroup, group) {
   const shapesInGroup = document.createElement('section');
   shapesInGroup.id = `shapes-in-${group.id}`;
 
-  panelForGroup.append(panelTitle, groupProperties, shapesInGroup);
+  panelForGroup.append(
+    panelTitle,
+    deleteGroupButton,
+    groupProperties,
+    shapesInGroup
+  );
+}
+
+function createDeleteGroupButton(group, panelForGroup) {
+  const deleteGroupButton = document.createElement('button');
+  deleteGroupButton.textContent = 'Delete';
+  deleteGroupButton.addEventListener('click', () => {
+    groupPanels.removeChild(panelForGroup);
+    removeSvgGroup(group);
+  });
+  return deleteGroupButton;
 }
 
 export function appendShapeToPanelForGroup(shape, group) {

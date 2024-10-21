@@ -16,3 +16,7 @@ export function appendShapeToGroup(shape) {
     appendShapeToPanelForGroup(shape, group);
   }
 }
+
+export function resetCurrentGroup() {
+  group = null;
+}

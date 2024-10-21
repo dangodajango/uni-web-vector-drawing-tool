@@ -1,3 +1,4 @@
+import { resetCurrentGroup } from '../canvas-toolbar/group-tool.js';
 import { canvas } from '../canvas/canvas-configuration.js';
 
 export function createSvgGroup() {
@@ -9,7 +10,7 @@ export function createSvgGroup() {
 }
 
 export function appendShapeToSvgGroup(shape, group) {
-  if (!isShapePartOfAnyGroup(shape)) {
+  if (group && !isShapePartOfAnyGroup(shape)) {
     canvas.removeChild(shape);
     group.append(shape);
     return true;
@@ -29,8 +30,14 @@ function isShapePartOfAnyGroup(shape) {
 }
 
 export function ejectShapeFromSvgGroup(shape, group) {
-  console.log(group);
-  
   group.removeChild(shape);
   canvas.appendChild(shape);
+}
+
+export function removeSvgGroup(group) {
+  Array.from(group.children).forEach((shape) => {
+    ejectShapeFromSvgGroup(shape, group);
+  });
+  canvas.removeChild(group);
+  resetCurrentGroup();
 }
