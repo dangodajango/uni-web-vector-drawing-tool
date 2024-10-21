@@ -1,34 +1,18 @@
+import { appendShapeToSvgGroup, createSvgGroup } from '../group-panel/group.js';
 import {
-  appendToExistingGroupDisplay,
-  createGroupDisplay,
-} from '../shape-groups/group-display.js';
-import { canvas } from '../canvas/canvas-configuration.js';
+  appendShapeToPanelForGroup,
+  createPanelForGroup,
+} from '../group-panel/group-panel.js';
 
 let group;
 
 export function createShapeGroup() {
-  group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-  group.setAttribute('transform', 'translate(0,0) rotate(0) scale(1,1)');
-  group.id = `group-${Date.now()}`;
-  canvas.append(group);
-  createGroupDisplay(group);
+  group = createSvgGroup();
+  createPanelForGroup(group);
 }
 
 export function appendShapeToGroup(shape) {
-  if (isShapePartOfAnyGroup(shape)) {
-    return;
+  if (appendShapeToSvgGroup(shape, group)) {
+    appendShapeToPanelForGroup(shape, group);
   }
-  canvas.removeChild(shape);
-  group.append(shape);
-  appendToExistingGroupDisplay(group, shape);
-}
-
-function isShapePartOfAnyGroup(shape) {
-  const groups = canvas.querySelectorAll('g');
-  for (const group of groups) {
-    if (group.querySelector(`#${shape.id}`)) {
-      return true;
-    }
-  }
-  return false;
 }
