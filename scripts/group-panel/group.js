@@ -27,3 +27,10 @@ function isShapePartOfAnyGroup(shape) {
   }
   return false;
 }
+
+export function ejectShapeFromSvgGroup(shape, group) {
+  console.log(group);
+  
+  group.removeChild(shape);
+  canvas.appendChild(shape);
+}

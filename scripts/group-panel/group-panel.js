@@ -1,6 +1,7 @@
 import displayAdvancedProperties from '../shape-properties/advanced-properties-display.js';
 import { selectEllipse } from '../shape-factory/ellipse.js';
 import { selectRectangle } from '../shape-factory/rectangle.js';
+import { ejectShapeFromSvgGroup } from './group.js';
 
 const groupPanels = document.getElementById('group-panels');
 
@@ -45,7 +46,11 @@ function createShapeStructure(shapesInGroup, shape) {
   const shapeStructure = document.createElement('div');
 
   const shapeTitle = createShapeTitle(shape);
-  const ejectShapeButton = createEjectButton(shapeStructure);
+  const ejectShapeButton = createEjectButton(
+    shape,
+    shapesInGroup,
+    shapeStructure
+  );
   shapeStructure.append(shapeTitle, ejectShapeButton);
 
   shapesInGroup.append(shapeStructure);
@@ -64,11 +69,18 @@ function createShapeTitle(shape) {
   return shapeTitle;
 }
 
-function createEjectButton() {
+function createEjectButton(shape, shapesInGroup, shapeStructure) {
   const ejectButton = document.createElement('button');
   ejectButton.textContent = 'Eject';
   ejectButton.addEventListener('click', () => {
-    console.log('Ejected');
+    ejectShapeFromGroup(shape, shapesInGroup, shapeStructure);
   });
   return ejectButton;
+}
+
+function ejectShapeFromGroup(shape, shapesInGroup, shapeStructure) {
+  shapesInGroup.removeChild(shapeStructure);
+  const groupId = shapesInGroup.id.match(/g-\d+/)[0];
+  const group = document.getElementById(groupId);
+  ejectShapeFromSvgGroup(shape, group);
 }
