@@ -9,7 +9,7 @@ function enrichRotate(shape) {
   const shapeId = shape.id;
   if (/^ellipse-\d+$/.test(shapeId)) {
     return [shape.getAttribute('cx'), shape.getAttribute('cy')];
-  } else if (/^rectangle-\d+$/.test(shapeId) || /^group-\d+$/.test(shapeId)) {
+  } else if (/^rectangle-\d+$/.test(shapeId) || /^g-\d+$/.test(shapeId)) {
     return calculateRotateAngleBoundingBox(shape);
   }
 }

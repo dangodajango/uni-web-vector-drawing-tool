@@ -34,10 +34,15 @@ export function ejectShapeFromSvgGroup(shape, group) {
   canvas.appendChild(shape);
 }
 
-export function removeSvgGroup(group) {
+export function disbandSvgGroup(group) {
   Array.from(group.children).forEach((shape) => {
     ejectShapeFromSvgGroup(shape, group);
   });
+  canvas.removeChild(group);
+  resetCurrentGroup();
+}
+
+export function deleteSvgGroup(group) {
   canvas.removeChild(group);
   resetCurrentGroup();
 }

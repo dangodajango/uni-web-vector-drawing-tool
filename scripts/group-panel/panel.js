@@ -1,7 +1,11 @@
 import displayAdvancedProperties from '../shape-properties/advanced-properties-display.js';
 import { selectEllipse } from '../shape-factory/ellipse.js';
 import { selectRectangle } from '../shape-factory/rectangle.js';
-import { ejectShapeFromSvgGroup, removeSvgGroup } from './group.js';
+import {
+  ejectShapeFromSvgGroup,
+  disbandSvgGroup,
+  deleteSvgGroup,
+} from './group.js';
 import { updatedCurrentGroup } from '../canvas-toolbar/group-tool.js';
 import { configurePanelDrag, configurePanelDrop } from './panel-drag-drop.js';
 
@@ -18,7 +22,7 @@ export function createPanelForGroup(group) {
 
 function createPanelStructure(panelForGroup, group) {
   const panelTitle = createPanelTitle(group);
-  const deleteGroupButton = createDeleteGroupButton(group, panelForGroup);
+  const panelButtons = createPanelButtons(panelForGroup, group);
 
   const groupProperties = document.createElement('section');
   groupProperties.id = `properties-of-${group.id}`;
@@ -29,7 +33,7 @@ function createPanelStructure(panelForGroup, group) {
 
   panelForGroup.append(
     panelTitle,
-    deleteGroupButton,
+    ...panelButtons,
     groupProperties,
     shapesInGroup
   );
@@ -42,12 +46,28 @@ function createPanelTitle(group) {
   return panelTitle;
 }
 
+function createPanelButtons(panelForGroup, group) {
+  const dibandButton = createDisbandGroupButton(group, panelForGroup);
+  const deleteButton = createDeleteGroupButton(group, panelForGroup);
+  return [dibandButton, deleteButton];
+}
+
+function createDisbandGroupButton(group, panelForGroup) {
+  const disbandGroupButton = document.createElement('button');
+  disbandGroupButton.textContent = 'Disband';
+  disbandGroupButton.addEventListener('click', () => {
+    groupPanels.removeChild(panelForGroup);
+    disbandSvgGroup(group);
+  });
+  return disbandGroupButton;
+}
+
 function createDeleteGroupButton(group, panelForGroup) {
   const deleteGroupButton = document.createElement('button');
   deleteGroupButton.textContent = 'Delete';
   deleteGroupButton.addEventListener('click', () => {
     groupPanels.removeChild(panelForGroup);
-    removeSvgGroup(group);
+    deleteSvgGroup(group);
   });
   return deleteGroupButton;
 }

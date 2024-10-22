@@ -42,7 +42,6 @@ export function configurePanelDrop(dropZoneElement) {
   });
 
   dropZoneElement.addEventListener('dragend', () => {
-    console.log('END');
     currentlyDraggedElementData = null;
   });
 }
