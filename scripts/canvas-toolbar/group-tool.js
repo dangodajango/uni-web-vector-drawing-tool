@@ -1,8 +1,11 @@
-import { appendShapeToSvgGroup, createSvgGroup } from '../group-panel/group.js';
+import {
+  appendSvgElementToSvgGroup,
+  createSvgGroup,
+} from '../group-panel/group.js';
 import {
   appendShapeToPanelForGroup,
   createPanelForGroup,
-} from '../group-panel/group-panel.js';
+} from '../group-panel/panel.js';
 
 let group;
 
@@ -12,8 +15,16 @@ export function createShapeGroup() {
 }
 
 export function appendShapeToGroup(shape) {
-  if (appendShapeToSvgGroup(shape, group)) {
+  if (appendSvgElementToSvgGroup(shape, group)) {
     appendShapeToPanelForGroup(shape, group);
+  }
+}
+
+function appendGroupToGroup(toBeAppendedGroup) {
+  if (appendSvgElementToSvgGroup(toBeAppendedGroup, group)) {
+    console.log('testtrue');
+  } else {
+    console.log('testfalse');
   }
 }
 

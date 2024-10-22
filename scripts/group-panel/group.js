@@ -9,20 +9,20 @@ export function createSvgGroup() {
   return group;
 }
 
-export function appendShapeToSvgGroup(shape, group) {
-  if (group && !isShapePartOfAnyGroup(shape)) {
-    canvas.removeChild(shape);
-    group.append(shape);
+export function appendSvgElementToSvgGroup(svgElement, group) {
+  if (group && !isSvgElementPartOfAnyGroup(svgElement)) {
+    canvas.removeChild(svgElement);
+    group.append(svgElement);
     return true;
   } else {
     return false;
   }
 }
 
-function isShapePartOfAnyGroup(shape) {
+function isSvgElementPartOfAnyGroup(svgElement) {
   const groups = canvas.querySelectorAll('g');
   for (const group of groups) {
-    if (group.querySelector(`#${shape.id}`)) {
+    if (group.querySelector(`#${svgElement.id}`)) {
       return true;
     }
   }

@@ -3,6 +3,7 @@ import { selectEllipse } from '../shape-factory/ellipse.js';
 import { selectRectangle } from '../shape-factory/rectangle.js';
 import { ejectShapeFromSvgGroup, removeSvgGroup } from './group.js';
 import { updatedCurrentGroup } from '../canvas-toolbar/group-tool.js';
+import { configurePanelDrag, configurePanelDrop } from './panel-drag-drop.js';
 
 const groupPanels = document.getElementById('group-panels');
 
@@ -10,6 +11,7 @@ export function createPanelForGroup(group) {
   const panelForGroup = document.createElement('div');
   panelForGroup.id = `panel-for-${group.id}`;
   createPanelStructure(panelForGroup, group);
+  configurePanelDrop(panelForGroup);
   groupPanels.append(panelForGroup);
   return panelForGroup;
 }
@@ -51,6 +53,8 @@ function createDeleteGroupButton(group, panelForGroup) {
 }
 
 export function appendShapeToPanelForGroup(shape, group) {
+  console.log(shape, group);
+
   const panelForGroup = findPanelForGroup(group);
   const shapesInGroup = panelForGroup.querySelector(`#shapes-in-${group.id}`);
   createShapeStructure(shapesInGroup, shape);
@@ -67,6 +71,7 @@ function findPanelForGroup(group) {
 
 function createShapeStructure(shapesInGroup, shape) {
   const shapeStructure = document.createElement('div');
+  configurePanelDrag(shapeStructure, shape);
 
   const shapeTitle = createShapeTitle(shape);
   const ejectShapeButton = createEjectButton(
@@ -101,7 +106,7 @@ function createEjectButton(shape, shapesInGroup, shapeStructure) {
   return ejectButton;
 }
 
-function ejectShapeFromGroup(shape, shapesInGroup, shapeStructure) {
+export function ejectShapeFromGroup(shape, shapesInGroup, shapeStructure) {
   shapesInGroup.removeChild(shapeStructure);
   const groupId = shapesInGroup.id.match(/g-\d+/)[0];
   const group = document.getElementById(groupId);
