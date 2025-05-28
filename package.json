@@ -1,0 +1,15 @@
+{
+  "name": "uni-web-vector-drawing-tool2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "serve": "http-server ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
